@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './HeaderStyle.css';
+import './NavStyle.css';
 
 
 
 
-function Header() {
+
+function Nav() {
 
 return (
     <header className="main-nav">
@@ -13,12 +14,11 @@ return (
         <img className="main-nav-logo-image" src="./my-app/src/assets/img/argentBankLogo.png" alt="Argent Bank Logo" />
       </Link>
       <Link to="/login" className="main-nav-item">
-        <i className="fa fa-user-circle"></i>
         Sign In
       </Link>
     </header>
 
   );
-}
+} 
 
-export default Header
+export default Nav
