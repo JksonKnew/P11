@@ -1,5 +1,8 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -8,9 +11,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/*" element={<Error />} />
+          <Route path="/*" element={<Error />} /> */}
         </Routes>
         <Footer />
       </Router>
