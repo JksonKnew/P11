@@ -1,4 +1,4 @@
-import './LoginStyle.css';
+import './LoginStyle.scss';
 
 
 

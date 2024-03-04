@@ -1,5 +1,5 @@
 import React from 'react'
-import './FeatureStyle.css'
+import './FeatureStyle.scss'
 
 function Feature({ src, alt, title, description }) {
     return (

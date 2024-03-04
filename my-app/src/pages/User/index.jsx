@@ -4,21 +4,21 @@ import Account from "../../components/Account";
 
 function User(){
 return (
-    <div className="main bg-dark">
+    <div className="account-section">
         <Account
-            title="Oui"
-            amount="$2000"
-            description="Oui"
+            title="Argent Bank Savings (x6712)"
+            amount="$10,928.42"
+            description="Available Balance"
         />
         <Account
-            title="Oui"
-            amount="$2000"
-            description="Oui"
+            title="Argent Bank Savings (x6712)"
+            amount="$10,928.42"
+            description="Available Balance"
         />
         <Account
-            title="Oui"
-            amount="$2000"
-            description="Oui"
+            title="Argent Bank Savings (x6712)"
+            amount="$10,928.42"
+            description="Available Balance"
         />
     </div>
   );

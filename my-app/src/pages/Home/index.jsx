@@ -2,7 +2,7 @@ import React from 'react'
 import Banner from '../../components/Banner';
 import Feature from '../../components/Features';
 
-import './HomeStyle.css'
+import './HomeStyle.scss'
 
 
 function Home() {
