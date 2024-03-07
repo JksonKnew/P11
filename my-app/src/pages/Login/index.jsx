@@ -1,21 +1,47 @@
+import React, { useState } from 'react';
 import './LoginStyle.scss';
 
-
-
-
-
 function Login() {
-return (
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleUsername = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const userData = {
+      email: username,
+      password: password
+    };
+
+    fetch('http://localhost:3001/api/v1/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    });
+  };
+
+  return (
     <main className="main bg-dark">
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="email">Username</label>
             <input
               type="email"
               id="email"
+              value={username}
+              onChange={handleUsername}
             />
           </div>
           <div className="input-wrapper">
@@ -23,13 +49,12 @@ return (
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={handlePassword}
             />
           </div>
           <div className="input-remember">
-            <input
-              type="checkbox"
-              id="remember-me"
-            />
+            <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button type="submit" className="sign-in-button">
