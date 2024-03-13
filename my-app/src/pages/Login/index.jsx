@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginStyle.scss';
 
 function Login() {
@@ -13,6 +14,8 @@ function Login() {
     setPassword(event.target.value);
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const userData = {
@@ -26,6 +29,21 @@ function Login() {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      if (data.status !== 200) {
+        console.log('False');
+        return;
+      } else {
+        navigate('/user'); 
+        console.log(data.body.token) // A ajouter dans redux 
+      }
+    })
+    .catch(error => {
+      console.error(error);
     });
   };
 
