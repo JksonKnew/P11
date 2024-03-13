@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginStyle.scss';
+import { useDispatch } from 'react-redux';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -38,6 +41,12 @@ function Login() {
         console.log('False');
         return;
       } else {
+        dispatch (
+          {
+            type: 'LOGIN',
+            payload: {token: data.body.token}
+          }
+        );
         navigate('/user'); 
         console.log(data.body.token) // A ajouter dans redux 
       }
