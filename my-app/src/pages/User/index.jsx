@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Account from "../../components/Account";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 function User(){
+
+    const token = useSelector((state) => state.auth.token);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/login');
+        }
+    });
+
 return (
     <div className="account-section">
         <Account

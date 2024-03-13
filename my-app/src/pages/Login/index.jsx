@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LoginStyle.scss';
 import { useDispatch } from 'react-redux';
+import './LoginStyle.scss';
 
 function Login() {
   const [username, setUsername] = useState('');
