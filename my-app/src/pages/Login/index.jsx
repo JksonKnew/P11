@@ -17,6 +17,7 @@ function Login() {
     try {
       const response = await login(email, password);
       const token  = response.data.body.token;
+      console.log(email, password)
       
       if(response.status === 200) {
         localStorage.setItem('authToken', token);
