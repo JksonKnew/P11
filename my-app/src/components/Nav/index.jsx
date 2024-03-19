@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import './NavStyle.scss';
 
 
@@ -7,6 +8,8 @@ import './NavStyle.scss';
 
 
 function Nav() {
+
+  // const token = useSelector((state) => state.auth.token);
 
 return (
     <header className="main-nav">
@@ -21,4 +24,4 @@ return (
   );
 } 
 
-export default Nav
+export default Nav;
