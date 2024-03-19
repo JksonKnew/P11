@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LoginStyle.scss';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import { login } from '../../redux/slices/apiSlice'
+import { loginSuccess } from '../../redux/slices/authSlice';
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleForm = async (e) => {
+		e.preventDefault();
+
+    try {
+      const response = await login(email, password);
+      const token  = response.data.body.token;
+      
+      if(response.status === 200) {
+        localStorage.setItem('authToken', token);
+        dispatch(
+          loginSuccess({ 
+            token 
+          })
+        );
+        navigate("/user");
+      }
+    } catch (error) {
+      dispatch({
+        type: "LOGIN_FAIL",
+        payload: error.message,
+      });
+      console.log(error)
+      }
+	};
+
   return (
     <div className='container'>
       <main className='main bg-dark'>
@@ -33,8 +67,7 @@ function Login() {
             <input type="checkbox" id="remember-me" /><label htmlFor="remember-me"
               >Remember me</label>
           </div>
-            <button type="submit" className="sign-in-button">Sign In</button> 
-            {errorMessage && <p className="sign-in-error-message">{errorMessage}</p>}       
+            <button type="submit" className="sign-in-button">Sign In</button>       
         </form>
       </section>
     </main>
