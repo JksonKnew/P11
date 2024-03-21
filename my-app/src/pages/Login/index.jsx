@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import './LoginStyle.scss';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../redux/slices/apiSlice'
 import { loginSuccess } from '../../redux/slices/authSlice';
+import './LoginStyle.scss';
 
 function Login() {
+  const token = useSelector((state) => state.auth.token);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+        navigate('/user');
+    }
+});
 
   const handleForm = async (e) => {
 		e.preventDefault();

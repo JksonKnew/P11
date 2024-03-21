@@ -16,13 +16,9 @@ const authSlice = createSlice({
         logout: (state) => {
             state.isConnected = false;
             state.token = ""
-        },
-        loginFail: (state, action) => {
-            state.isConnected = false;
-            state.token = ""
         }
     }
 })
 
-export const { loginSuccess, logout, loginFail } = authSlice.actions;
+export const { loginSuccess, logout } = authSlice.actions;
 export default authSlice.reducer;
