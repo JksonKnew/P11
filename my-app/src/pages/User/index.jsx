@@ -25,7 +25,7 @@ function User(){
             navigate('/login');
         }
     });
-
+    
     // Récupere l'information User
     useEffect(() => {
         const userAccount = async () => {

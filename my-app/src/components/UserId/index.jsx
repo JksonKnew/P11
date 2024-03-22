@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import { userSuccess } from '../../redux/slices/userSlice'
+import { updateUserInfo } from '../../redux/slices/apiSlice'
 import './UserIdStyle.scss'
+import { useDispatch, useSelector } from 'react-redux'
 
 function UserId({ firstName, lastName, userName }) {
 
-    const [isEditing, setIsEditing] = useState(false)
-    const [newUsername, setNewUsername] = useState('')
+    const Token = useSelector((state) => state.auth.token)
+    const dispatch = useDispatch();
+    const [isEditing, setIsEditing] = useState(false);
+    const [newUsername, setNewUsername] = useState('');
 
     const handleEditClick = () => {
         setIsEditing(true);
@@ -15,9 +20,40 @@ function UserId({ firstName, lastName, userName }) {
         setIsEditing(false);
     }
 
-    const handleSaveClick = () => {
-        setNewUsername();
+    const handleSaveClick = async (e) => {
+		e.preventDefault();
+
+        try {
+            const response = await updateUserInfo(Token, newUsername)
+            
+            // Récupération des nouvelles informations de l'utilisateur depuis la réponse
+            const firstName = response.data.body.firstName;
+            const lastName = response.data.body.lastName;
+            const userName = response.data.body.userName;
+
+            if(response.status === 200) {
+                // Dispatch de l'action "userSuccess" pour mettre à jour le store Redux
+                dispatch(
+                    userSuccess({
+                        firstName,
+                        lastName,
+                        userName,
+                    })
+                )
+                // Masque le formulaire
+                setIsEditing(false)
+            }
+        } catch ( error) {
+            if(error){
+                console.log(error)
+            }
+        }
     }
+
+    const handleInputChange = (e) => {
+        setNewUsername(e.target.value);
+    };
+
 
     return (
         <div className="userSection">
@@ -36,7 +72,7 @@ function UserId({ firstName, lastName, userName }) {
                             type="text"
                             placeholder="New username"
                             value={newUsername}
-                            onChange={handleSaveClick}
+                            onChange={handleInputChange}
                         />
                     </div>
                     <div className='input-wrapper'>
