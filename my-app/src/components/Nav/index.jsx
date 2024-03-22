@@ -1,15 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import './NavStyle.scss';
-
-
-
+import { logout } from "../../redux/slices/authSlice";
+import { userLogOut } from "../../redux/slices/userSlice";
 
 
 function Nav() {
 
-  // const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(userLogOut());
+    localStorage.removeItem("Token");
+  };
 
 return (
     <header className="main-nav">
@@ -19,6 +24,7 @@ return (
       <Link to="/login" className="main-nav-item">
         Sign In
       </Link>
+      <button onClick={handleLogout}>Logout</button>
     </header>
 
   );

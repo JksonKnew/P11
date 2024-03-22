@@ -14,6 +14,7 @@ export const login = async (email, password) => {
     }
 };
 
+
 //user
 export const userInfo = async (Token) => {
     const headers = {
@@ -26,4 +27,21 @@ export const userInfo = async (Token) => {
     } catch (error) {
       throw error;
     }
+}
+
+// update user
+export const updateUserInfo = async (Token, userForm) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${Token}`
+};
+const data = {
+  userName: userForm,
+}
+try {
+    const response = await axios.put(`${API_URL}/user/profile`, data, {headers});
+  return response;
+} catch (error) {
+  throw error;
+}
 }

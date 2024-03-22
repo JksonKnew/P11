@@ -4,21 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userInfo } from "../../redux/slices/apiSlice";
 import { userSuccess } from "../../redux/slices/userSlice";
+import "./userStyle.scss"
 
 
 function User(){
 
     const token = useSelector((state) => state.auth.token);
+    const isConnected = useSelector((state) => state.auth.isConnected)
+    const firstName = useSelector((state) => state.user.firstName);
+    const lastName = useSelector((state) => state.user.lastName);
+    const userName = useSelector((state) => state.user.userName);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     
+    // redirection si aucun token n'est trouvé
     useEffect(() => {
-        if (!token) {
+        if (!isConnected) {
             navigate('/login');
         }
     });
 
+    // Récupere l'information User
     useEffect(() => {
         const userAccount = async () => {
             try {
@@ -28,6 +35,7 @@ function User(){
                 const userName = response.data.body.userName;
 
                 if(response.status === 200) {
+                    // Met a jour le store redux "userSuccess"
                     dispatch(
                         userSuccess({
                             firstName,
@@ -40,14 +48,19 @@ function User(){
                 console.log("error")
             }
         }
-        if (token) {
+        if (isConnected) {
             userAccount();
         }
-    },[dispatch, token]);
+    },[dispatch, token, isConnected]);
+
+
+
+
+
 
 return (
     <div className="account-section">
-        <div>{firstName}</div>
+        <h1 className="username">Hello {firstName} {lastName}</h1>
         <Account
             title="Argent Bank Savings (x6712)"
             amount="$10,928.42"
