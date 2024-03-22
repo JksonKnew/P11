@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userInfo } from "../../redux/slices/apiSlice";
 import { userSuccess } from "../../redux/slices/userSlice";
+import UserId from "../../components/UserId";
 import "./userStyle.scss"
 
 
@@ -59,24 +60,28 @@ function User(){
 
 
 return (
+<React.Fragment>
+<div className="container">
+    <UserId firstName={firstName} lastName={lastName} userName={userName} />
     <div className="account-section">
-        <h1 className="username">Hello {firstName} {lastName}</h1>
         <Account
             title="Argent Bank Savings (x6712)"
             amount="$10,928.42"
             description="Available Balance"
-        />
+            />
         <Account
             title="Argent Bank Savings (x6712)"
             amount="$10,928.42"
             description="Available Balance"
-        />
+            />
         <Account
             title="Argent Bank Savings (x6712)"
             amount="$10,928.42"
             description="Available Balance"
-        />
+            />
     </div>
+</div>
+</React.Fragment>
   );
 }
 
