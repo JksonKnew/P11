@@ -1,9 +1,9 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: '1.0.0'
-  termsOfService: 'http://swagger.io/terms/'
+  version: "1.0.1"
+  termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -21,17 +21,17 @@ paths:
           description: Login Payload
           required: true
           schema:
-            $ref: '#/definitions/Login'
+            $ref: "#/definitions/Login"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Login Successfully
           schema:
-            $ref: '#/definitions/LoginResponse'
-        '400':
+            $ref: "#/definitions/LoginResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/signup:
     post:
@@ -45,17 +45,17 @@ paths:
           description: Signup Payload
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Signup Successfully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/profile:
     post:
@@ -66,15 +66,15 @@ paths:
       summary: User Profile API
       description: API for fetching a user profile
       #produces:
-       # - application/json
+      # - application/json
       responses:
-        '200':
+        "200":
           description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
     put:
       security:
@@ -89,18 +89,197 @@ paths:
           description: Update user profile attributes
           required: true
           schema:
-            $ref: '#/definitions/UserProfile'
+            $ref: "#/definitions/UserProfile"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
+  /user/accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts Module
+      summary: User Account API
+      description: get all user's account
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successfully
+          schema:
+            type: array
+            example:
+            - id: 0
+              title: "Argent Bank Checking (x1234)" 
+              amount: 1234.46
+              description: "Available Balance"
+            - id: 1
+              title: "Argent Bank Savings (x1234)"
+              amount: 1234.56
+              description: "Available Balance"
+            - id: 2
+              title: "Argent Bank Credit Card (x1234)" 
+              amount: 1234.56
+              description: "Current Balance"              
+        "400":
+          description: Infalid Fields
+        "500":
+          description: Internal Server Error
+  /user/accounts/{account_id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Transaction API
+      description: API to get all transactions
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer
+          required: true
+          type: string
+        - in: path
+          name: account_id
+          description: account id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successfully
+          schema:
+            type: array
+            example:
+            - id: 0
+              date: "2024-01-01T00:00:00.000Z"
+              description: "Coffee"
+              amount: 10
+              balance: 1234.56
+            - id: 1
+              date: "2024-01-01T00:00:00.000Z"
+              description: "Coffee"
+              amount: 10
+              balance: 1234.56
+            - id: 2
+              date: "2024-01-01T00:00:00.000Z"
+              description: "Coffee"
+              amount: 10
+              balance: 1234.56
+        "400":
+          description: Invalid Field
+        "500":
+          description: Internal Server Error
+  /user/account/{account_id}/transaction/{transaction_id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Transactions API
+      description: Get details of unique transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Baerer
+          required: true
+          type: string
+        - in: path
+          name: transaction_id
+          description: Transaction id
+          required: true
+          type: sring
+        - in: path
+          name: account_id
+          description: Account ID
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: A single transaction retrieved successully
+          schema:
+            type: array
+            example:
+            - id: 0
+              date: "2024-01-01T00:00:00.000Z"
+              description: "Coffee"
+              amount: 10
+              balance: 1234.56
+              transactionType: "Food"
+              note: "Lorem"
+        "400":
+          description: Invalid Field
+        "500":
+          description: Internal Server Error
+  /user/accounts/{account_id}/transactions/{transaction_id}:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Transactions API
+      description: Update transaction détails
+      parameters:
+        - in: header
+          name: Authorization
+          description: Baerer
+          required: true
+          type: string
+        - in: path
+          description: transaction Id
+          name: transaction_id
+          required: true
+          type: string
+        - in: path
+          description: account Id
+          name: account_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: update attributes
+          required: true
+          schema:
+            type: array
+            example:
+            - categroy: "lorem"
+              balance: "lorem"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: updated transaction successully
+          schema:
+            type: array
+            example:
+            - id: 0
+              date: "2024-01-01T00:00:00.000Z"
+              description: "Coffee"
+              amount: 10
+              balance: 1234.56
+              transactionType: "Food"
+              note: "Lorem"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error          
 securityDefinitions:
   Bearer:
     type: apiKey
