@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { userInfo } from "../../redux/slices/apiSlice";
 import { userSuccess } from "../../redux/slices/userSlice";
 import UserId from "../../components/UserId";
+import data from "../../assets/data/Accountdata.json"
 import "./userStyle.scss"
+
 
 
 function User(){
@@ -25,7 +27,7 @@ function User(){
             navigate('/login');
         }
     });
-    
+
     // Récupere l'information User
     useEffect(() => {
         const userAccount = async () => {
@@ -54,31 +56,18 @@ function User(){
         }
     },[dispatch, token, isConnected]);
 
-
-
-
-
-
 return (
 <React.Fragment>
 <div className="container">
     <UserId firstName={firstName} lastName={lastName} userName={userName} />
     <div className="account-section">
-        <Account
-            title="Argent Bank Savings (x6712)"
-            amount="$10,928.42"
-            description="Available Balance"
-            />
-        <Account
-            title="Argent Bank Savings (x6712)"
-            amount="$10,928.42"
-            description="Available Balance"
-            />
-        <Account
-            title="Argent Bank Savings (x6712)"
-            amount="$10,928.42"
-            description="Available Balance"
-            />
+    {data.map((item) => (
+        <Account 
+            key={item.id}
+            title={item.title}
+            amount={item.amount}
+            description={item.description} />
+    ))}
     </div>
 </div>
 </React.Fragment>
