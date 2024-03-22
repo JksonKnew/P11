@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../redux/slices/apiSlice'
-import { loginSuccess } from '../../redux/slices/authSlice';
+import { loginSuccess, loginFail } from '../../redux/slices/authSlice';
 import './LoginStyle.scss';
 
 function Login() {
@@ -13,6 +13,17 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [buttonOnError, setButtonOnError] = useState(false)
+
+  const changeEmailInput = (e) => {
+    setButtonOnError(false)
+    setEmail(e.target.value)
+  }
+
+  const changePasswordInput = (e) => {
+    setButtonOnError(false)
+    setPassword(e.target.value)
+  }
 
   useEffect(() => {
     if (token) {
@@ -38,11 +49,10 @@ function Login() {
         navigate("/user");
       }
     } catch (error) {
-      dispatch({
-        type: "LOGIN_FAIL",
-        payload: error.message,
-      });
-      console.log(error)
+      dispatch(
+        loginFail()
+      );
+      setButtonOnError(true)
       }
 	};
 
@@ -59,7 +69,7 @@ function Login() {
               type="text"
               name="username"
               value={email}
-              onChange={(e) => setEmail(e.target.value)} 
+              onChange={(e) => changeEmailInput(e)} 
               id="username"
             />
           </div>
@@ -69,7 +79,7 @@ function Login() {
               type="password" 
               name="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => changePasswordInput(e)}
               id="password"
             />
           </div>
@@ -77,7 +87,12 @@ function Login() {
             <input type="checkbox" id="remember-me" /><label htmlFor="remember-me"
               >Remember me</label>
           </div>
-            <button type="submit" className="sign-in-button">Sign In</button>       
+          {!buttonOnError ? (
+            <button type="submit" className="sign-in-button">Submit</button> 
+          ) : (
+            <button type="submit" className="sign-in-button-error">Invalid password or username</button> 
+          )}
+                  
         </form>
       </section>
     </main>
