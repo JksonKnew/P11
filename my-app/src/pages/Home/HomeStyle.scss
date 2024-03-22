@@ -1,3 +1,15 @@
-.Features {
+.homeContainer{
   display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 50px;
+  .Features {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 43px;
+    padding: 2rem;
+    .feature-item {
+      max-width: 300px;
+    }
+  }
 }

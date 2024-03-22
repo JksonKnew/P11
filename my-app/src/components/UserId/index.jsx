@@ -66,7 +66,7 @@ function UserId({ firstName, lastName, userName }) {
             <React.Fragment>
                 <form className="editForm">
                     <div className='input-wrapper'>
-                        <label htmlFor="username"></label>
+                        <label htmlFor="username">User Name</label>
                         <input
                             id='username'
                             type="text"
@@ -76,7 +76,7 @@ function UserId({ firstName, lastName, userName }) {
                         />
                     </div>
                     <div className='input-wrapper'>
-                        <label htmlFor="firstname"></label>
+                        <label htmlFor="firstname">First Name</label>
                         <input
                             id='firstname'
                             type="text"
@@ -86,7 +86,7 @@ function UserId({ firstName, lastName, userName }) {
                         />
                     </div>
                     <div className='input-wrapper'>
-                        <label htmlFor="lastname"></label>
+                        <label htmlFor="lastname">Last Name</label>
                         <input
                             id='lastname'
                             type="text"

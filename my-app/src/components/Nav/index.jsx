@@ -4,6 +4,9 @@ import { useDispatch} from "react-redux";
 import { logout } from "../../redux/slices/authSlice";
 import { userLogOut } from "../../redux/slices/userSlice";
 import { useSelector } from "react-redux";
+import argentBankLogo from "../../assets/img/argentBankLogo.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import './NavStyle.scss';
 
 
@@ -22,7 +25,7 @@ function Nav() {
 return (
     <header className="main-nav">
       <Link to="/" className="main-nav-logo">
-        <img className="main-nav-logo-image" src="./my-app/src/assets/img/argentBankLogo.png" alt="Argent Bank Logo" />
+        <img className="main-nav-logo-image" src={argentBankLogo} alt="Argent Bank Logo" />
       </Link>
       {!isConnected ? (
       <Link to="/login" className="main-nav-item">
@@ -30,8 +33,16 @@ return (
       </Link>
       ) : (
         <React.Fragment>
-          <Link className="main-nav-item" to="/user">{userName}</Link>
-          <Link className="main-nav-item" onClick={handleLogout}>Logout</Link>
+          <div className="navLinkContainer">
+          <Link className="main-nav-item" to="/user">
+          <FontAwesomeIcon icon={faUser} />
+            {userName}
+          </Link>
+          <Link className="main-nav-item" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faRightFromBracket} />
+          <span>Logout</span>
+          </Link>
+          </div>
         </React.Fragment>
       )}
     </header>

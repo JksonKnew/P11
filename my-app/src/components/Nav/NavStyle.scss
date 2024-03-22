@@ -6,26 +6,18 @@
   a {
     font-weight: bold;
     color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    &:hover {
+      text-decoration: underline;
     }
-    .main-nav-logo {
-      display: flex;
-      align-items: center;
-      img {
-        max-width: 100%;
-        width: 200px;
-      }
-    }
-    .main-nav-item {
-      text-decoration: none;
-      margin-right: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+  }
+  .navLinkContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
   }
   }
