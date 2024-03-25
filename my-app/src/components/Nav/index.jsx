@@ -4,7 +4,7 @@ import { useDispatch} from "react-redux";
 import { logout } from "../../redux/slices/authSlice";
 import { userLogOut } from "../../redux/slices/userSlice";
 import { useSelector } from "react-redux";
-import argentBankLogo from "../../assets/img/argentBankLogo.png"
+import argentBankLogo from "../../assets/img/argentBankLogo.webp"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import './NavStyle.scss';
@@ -29,6 +29,7 @@ return (
       </Link>
       {!isConnected ? (
       <Link to="/login" className="main-nav-item">
+        <FontAwesomeIcon icon={faUser} />
         Sign In
       </Link>
       ) : (

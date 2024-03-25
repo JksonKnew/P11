@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 5px 20px;
+  height: 65px;
   a {
     font-weight: bold;
     font-size: large;
@@ -11,7 +12,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 20px;
+    height: 100%;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
     &:hover {
       text-decoration: underline;
     }
@@ -19,6 +24,6 @@
   .navLinkContainer {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 30px;
   }
   }

@@ -52,3 +52,11 @@
     }
   }
 }
+  
+
+@media (max-width: 720px) {
+  .account-section .account {
+    flex-direction: column;
+    align-items: normal;
+  }
+}

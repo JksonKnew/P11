@@ -1,4 +1,4 @@
-.homeContainer{
+.homeContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -8,8 +8,16 @@
     justify-content: space-evenly;
     gap: 43px;
     padding: 2rem;
+    
+  }
     .feature-item {
       max-width: 300px;
     }
   }
-}
+
+  @media (max-width: 920px) {
+    .Features {
+      flex-direction: column;
+      align-items: center;
+    }
+  }

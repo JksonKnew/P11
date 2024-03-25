@@ -10,6 +10,7 @@ function UserId({ firstName, lastName, userName }) {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [newUsername, setNewUsername] = useState('');
+    const [isValid, setIsValid] = useState(true)
 
     const handleEditClick = () => {
         setIsEditing(true);
@@ -23,35 +24,40 @@ function UserId({ firstName, lastName, userName }) {
     const handleSaveClick = async (e) => {
 		e.preventDefault();
 
-        try {
-            const response = await updateUserInfo(Token, newUsername)
+        if (newUsername) {
+            try {
+                const response = await updateUserInfo(Token, newUsername)
+                
+                // Récupération des nouvelles informations de l'utilisateur depuis la réponse
+                const firstName = response.data.body.firstName;
+                const lastName = response.data.body.lastName;
+                const userName = response.data.body.userName;
+                
+                if(response.status === 200) {
+                    // Dispatch de l'action "userSuccess" pour mettre à jour le store Redux
+                    dispatch(
+                        userSuccess({
+                            firstName,
+                            lastName,
+                            userName,
+                        })
+                        )
+                        // Masque le formulaire
+                        setIsEditing(false)
+                    }
+                } catch ( error) {
+                    if(error){
+                        console.log(error)
+                    }
+                }
+            } else (
+                setIsValid(false)
+            )
+            }
             
-            // Récupération des nouvelles informations de l'utilisateur depuis la réponse
-            const firstName = response.data.body.firstName;
-            const lastName = response.data.body.lastName;
-            const userName = response.data.body.userName;
-
-            if(response.status === 200) {
-                // Dispatch de l'action "userSuccess" pour mettre à jour le store Redux
-                dispatch(
-                    userSuccess({
-                        firstName,
-                        lastName,
-                        userName,
-                    })
-                )
-                // Masque le formulaire
-                setIsEditing(false)
-            }
-        } catch ( error) {
-            if(error){
-                console.log(error)
-            }
-        }
-    }
-
     const handleInputChange = (e) => {
         setNewUsername(e.target.value);
+        setIsValid(true)
     };
 
 
@@ -99,6 +105,7 @@ function UserId({ firstName, lastName, userName }) {
                     <button className="formButton" onClick={handleSaveClick}>Save</button>
                     <button className="formButton" onClick={handleCancelClick}>Cancel</button>
                 </div>
+                {!isValid ? (<span>Veuillez saisir un username</span>) : ''}
                 </form>
             </React.Fragment>
         )}

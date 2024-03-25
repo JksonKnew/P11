@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../redux/slices/apiSlice'
 import { loginSuccess, loginFail } from '../../redux/slices/authSlice';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import './LoginStyle.scss';
 
 function Login() {
@@ -60,7 +62,7 @@ function Login() {
     <div className='container'>
       <main className='main bg-dark'>
       <section className="sign-in-content">
-        <i className="fa fa-user-circle sign-in-icon"></i>
+      <FontAwesomeIcon icon={faUser} />
         <h1>Sign In</h1>
         <form onSubmit={handleForm}>
           <div className="input-wrapper">

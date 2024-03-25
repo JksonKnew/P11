@@ -1,4 +1,4 @@
-# Argent Bank API
+# Argent Bank Backend
 
 This codebase contains the code needed to run the backend for Argent Bank.
 
@@ -23,10 +23,7 @@ mongo --version
 
 ### Instructions
 
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+On /
 
 ```bash
 # Install dependencies
@@ -63,10 +60,25 @@ Once you run the `populate-db` script, you should have two users in your databas
 
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
 
-## Design Assets
 
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
+# Argent Bank Front end
 
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+## Getting Started
+
+In your terminal, you can run:
+
+```bash
+# Access to frontend project directory
+cd my-app
+
+# Start react dev mode
+npm run start
+```
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
